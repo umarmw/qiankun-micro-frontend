@@ -35,21 +35,20 @@ if (!window.__POWERED_BY_QIANKUN__) {
 }
 
 export async function bootstrap() {
-  console.log('[react16] react app bootstraped');
+  console.log('[react18] react app bootstraped');
 }
 
 export async function mount(props) {
-  console.log('[react16] props from main framework', props);
+  console.log('[react18] props from main framework', props);
   storeTest(props);
   render(props);
 }
 
 export async function unmount(props) {
-  const { container } = props;
-  root.unmount();
+  // const { container } = props;
   // ReactDOM.unmountComponentAtNode(container ? container.querySelector('#root') : document.querySelector('#root'));
+  root.unmount();
 }
-
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

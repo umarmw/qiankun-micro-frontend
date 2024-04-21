@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { lazy, Suspense } from 'react';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { Divider } from 'antd';
 
-function App() {
+// import 'antd/dist/antd.min.css';
+import './App.css';
+import logo from './logo.svg'
+
+import LibVersion from './components/LibVersion';
+import HelloModal from './components/HelloModal';
+
+import Home from './pages/Home';
+import About from './pages/About';
+// const About = lazy(() => import('./pages/About'));
+
+const RouteExample = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <BrowserRouter basename={window.__POWERED_BY_QIANKUN__ ? '/app2' : '/'}>
+      <nav>
+        <Link to="/">Home 2</Link>
+        <Divider type="vertical" />
+        <Link to="/about">About 2</Link>
+      </nav>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
+  );
+};
+
+export default function App() {
+  return (
+    <div className="app-main">
+      <LibVersion />
+      <HelloModal />
+
+      <Divider />
+
+      <img src={logo} className="App-logo" alt="logo" />
+
+      <Divider />
+
+      <RouteExample />
     </div>
   );
 }
-
-export default App;
